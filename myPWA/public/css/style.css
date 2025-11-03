@@ -16,7 +16,6 @@ main {
   text-align: center;
 }
 
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -44,7 +43,6 @@ nav h1 {
     color: #0c5451;
     margin-bottom: 0.5rem;
 }
-
 
 .container {
   display: grid;
@@ -109,4 +107,3 @@ nav h1 {
   text-align: justify;
   text-justify: inter-word;
 }
-

@@ -11,9 +11,7 @@ const assets = [
     "/icons/icon-512x512.png"
   ];
 
-
 const CATALOGUE_ASSETS = "catalogue-assets";
-
 
 self.addEventListener("install", (installEvt) => {
   installEvt.waitUntil(
@@ -29,7 +27,6 @@ self.addEventListener("install", (installEvt) => {
       })
   );
 });
-
 
 self.addEventListener("activate", function (evt) {
   evt.waitUntil(
@@ -59,6 +56,3 @@ self.addEventListener("fetch", function (evt) {
     })
   );
 })
-
-
-
