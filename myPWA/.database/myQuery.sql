@@ -14,6 +14,6 @@ CREATE TABLE suggestions(
     name = VARCHAR(50)
     email = VARCHAR(50)
     suggestion = VARCHAR(250)
-);
+    );
 
 INSERT INTO site_objects(index,image,name,year,brand,model_num,type,colour,description) VALUES (1,'imacg3.png','iMac G3', 1998, 000, 'computer', 'blue', 'sample description'
