@@ -22,3 +22,29 @@ fetch('./frontEndData.json')
     });
     document.querySelector(".container").innerHTML = result;
   }
+
+
+  
+/* Beginning of main program */
+
+var object_order_default = [1,2,3,4,5];
+var object_order_flex = [];
+var device_objects = document.getElementsByClassName("devices");
+
+var device_object_length = device_objects.length;
+function reset_objects () {
+  device_objects.hide()
+  for (var i = 0; i < device_object_length; i++) {
+      item = getElementByID('i');
+      item.unhide()
+  };
+};
+
+function sort_by (selected_option) {
+  device_objects.hide();
+  object_order_flex = [];
+  if (selected_option = "alphabetical") {
+    
+
+  };
+};
