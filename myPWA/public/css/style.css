@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+body {
+  background: #F3F2F3;
+  background: radial-gradient(circle,rgba(243, 242, 243, 1) 11%, rgba(175, 173, 177, 1) 100%);  
+}
+
+/* @import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -107,3 +112,4 @@ nav h1 {
   text-align: justify;
   text-justify: inter-word;
 }
+  */
