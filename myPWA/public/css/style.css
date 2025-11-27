@@ -18,7 +18,7 @@ body {
 }
 
 main {
-  max-width: 900px;
+  padding: 5rem;
   margin: auto;
   padding: 5rem;
 }
@@ -32,14 +32,12 @@ nav {
 }
 
 .logo {
-  display: block;
-  margin: auto;
-  width : 100px;
-  height: auto;
+  display: flex;
+  justify-content: center;
 }
-
-.img {
-  width : 100%;
+.logo img {
+  width: 100px;
+  height: auto;
 }
 
 .search_bar {
@@ -49,8 +47,10 @@ nav {
 
 .device_objects {
   display: grid;
+  place-items: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 60px;
+  padding: 5rem;
 }
 
 .object {
