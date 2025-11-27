@@ -2,13 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css">
     <title>buzz of the 00s</title>
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="/images/site_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -24,7 +27,7 @@
 
 <!-- Large logo in centre top of page -->
       <div class="logo">
-        <img src="images/logo.png">
+        <img id="img" src="images/logo.png">
       </div>
 
 <!-- interaction bar -->
@@ -48,57 +51,52 @@
 
       <!-- individual objects are displayed here -->
         <div class="object" id="1">
-           <img src="images/imacg3.png" alt="iMac G3">
+           <img class="image" src="images/imacg3.png" alt="iMac G3">
            <p>iMac G3</p>
         </div>
 
-        <div id="2">
-           <img class="object" src="images/imacg4.png" alt="iMac G4">
+        <div class="object" id="2">
+           <img class="image" src="images/imacg4.png" alt="iMac G4">
            <p>iMac G4</p>
         </div>
 
-        <div id="3">
-           <img class="object" src="images/iphone3gs.png" alt="iPhone 3Gs">
+        <div class="object" id="3">
+           <img class="image" src="images/iphone3gs.png" alt="iPhone 3Gs">
            <p>iPhone 3Gs</p>
         </div>
 
-        <div id="4">
-           <img class="object" src="images/cybershot.png" alt="Sony Cybershot">
+        <div class="object" id="4">
+           <img class="image" src="images/cybershot.png" alt="Sony Cybershot">
            <p>Sony Cybershot</p>
         </div>
 
-        <div id="5">
-           <img class="object" src="images/gameboyadv.png" alt="Game Boy Advanced">
+        <div class="object" id="5">
+           <img class="image" src="images/gameboyadv.png" alt="Game Boy Advanced">
            <p>Game Boy Advance</p>
         </div>
 
-        <div id="6">
-           <img class="object" src="images/motorolav525.png" alt="Motorola V525">
+        <div class="object" id="6">
+           <img class="image" src="images/motorolav525.png" alt="Motorola V525">
            <p>Motorola V525</p>
         </div>
 
-        <div id="7">
-           <img class="object" src="images/motorolarazr.png" alt="Motorola Razr V3">
+        <div class="object" id="7">
+           <img class="image" src="images/motorolav3.png" alt="Motorola Razr V3">
            <p>Motorola Razr V3</p>
         </div>
 
-        <div id="8">
-           <img class="object" src="images/samsungphone.png" alt="Samsung SPH-i300">
+        <div class="object" id="8">
+           <img class="image" src="images/samsungphone.png" alt="Samsung SPH-i300">
            <p>Samsung SPH-i300</p>
         </div>
 
-        <div id="9">
-           <img class="object" src="images/iphone2g.png" alt="iPhone 2G">
+        <div class="object" id="9">
+           <img class="image" src="images/iphone2g.png" alt="iPhone 2G">
            <p>iPhone 2G</p>
         </div>
 
-        <div id="10">
-           <img class="object" src="images/imacg3.png" alt="iMac G3">
-           <p>iMac G3</p>
-        </div>
-
-        <div id="11">
-           <img class="object" src="images/walkman.png" alt="Sony Walkman S603">
+        <div class="object" id="10">
+           <img class="image" src="images/walkman.png" alt="Sony Walkman S603">
            <p>Sony Walkman S603</p>
         </div>
 
@@ -122,8 +120,5 @@
     <script src="js/app.js"></script>
   </body>
 
-  <footer>
-    <p>2025</p>
-  </footer>
 
 </html>
