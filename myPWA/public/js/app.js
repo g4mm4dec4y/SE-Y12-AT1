@@ -24,8 +24,21 @@ fetch('./frontEndData.json')
   }
 
 
-  
+ 
+const filter_menu = document.getElementById('filter_accordion');
+const filter_button = document.getElementById('filter_button');
+
+
+function filter_hover () {
+  filter_menu.hidden = 'false';
+};
+
+filter_button.addEventListener("mouseover", filter_hover);
+
+
+
 /* Beginning of main program */
+
 
 var object_order_default = [1,2,3,4,5];
 var object_order_flex = [];
@@ -137,3 +150,4 @@ nav_icon.addEventListener("mouseover", navigation_box_display);
 clear_icon.addEventListener("click", search_clear);
 search_icon.addEventListener("click", search_obj)};
 */);}
+

@@ -18,53 +18,55 @@
     <main>
 
 <!-- Navigation -->
-      <nav>
-        <button class="nav_icon">
-          <a href=about.html class="hoverbutton">about</a>
-          <a href="suggest.html" class ="hoverbutton">suggest</a>
-        </button>
-      </nav>
+   <nav>
+      <button class="nav_icon">
+         <img src="images/menu.png">
+      </button>
+      <div class="dropdown_content">
+         <a href=about.html class="hoverbutton">about</a>
+         <a href="suggest.html" class ="hoverbutton">suggest</a>
+      </div>
+   </nav>
 
 <!-- Large logo in centre top of page -->
-      <div class="logo">
-        <img id="img" src="images/logo.png">
-      </div>
+   <div class="logo">
+      <img id="img" src="images/logo.png">
+   </div>
 
 <!-- interaction bar -->
       <div class="search_bar">
-         <div id="filter_button">
-            <button></button>
-         </div>
+            
+         <select id="brand_filter">
+            <option selected disabled>Filter by Brand</option>
+            <option id="brand">a</option>
+         </select>
+            
+         <select id="colour_filter">
+            <option selected disabled>Filter by Colour</option>
+            <option id="brand">a</option>
+         </select>
+            
+         <select id="type_filter">
+            <option selected disabled>Filter by Type</option>
+            <option id="brand">a</option>
+         </select>
 
-         <button id="filter_button"></button>
-
-         <div id="filter_popup">
-            <button id="brand">Device Brand</button>
-            <button id="colour">Device Colour</button>
-            <button id="type">Device Type</button>
-         </div>
-
-         <button id="sort_button"></button>
-
-         <div id="sort_popup">
-            <button id="alphabetical">Alphabetical (A-Z)</button>
-            <button id="reverse">Alphabetical (Z-A)</button>
-            <button id="increase">By year (low to high)</button>
-            <button id="decreasing">By year (high to low)</button>
-         </div>
+         <select id="sort_popup">
+            <option selected disabled>Sort By</option>
+            <option id="alphabetical">Alphabetical (A-Z)</option>
+            <option id="reverse">Alphabetical (Z-A)</option>
+            <option id="increase">By year (low to high)</option>
+            <option id="decreasing">By year (high to low)</option>
+         </select>
 
          <div id = search_field>
-            <input type="search" id="search" name="search_bar">
-            /* implement text that says search name, and also implement mandatory field entry*/
+            <input type="search" id="search" name="search_bar" placeholder="Search name...">
          </div>
 
          <div id="search_icon">
             <button></button>
          </div>
 
-         <div id="clear_icon">
-            <button></button>
-         </div>
       </div>
 
 <!-- Class object area -->
