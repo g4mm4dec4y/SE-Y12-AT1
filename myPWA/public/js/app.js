@@ -86,24 +86,25 @@ class Suggestion {
 // actual interaction. apparently requires separate functions
 
 function display (object_index) {
-  object_index.forEach(({ name, image, hyperlink, about} = rows) => {
-    result += `
-      <div class="card">
-          <img class="card-image" src="${image}" alt="Product image for the ${name} VSCode extension."/>
-          <h1 class="card-name">${name}</h1>
-          <p class="card-about">${about}</p>
-          <a class="card-link" href="${hyperlink}"><button class="btn">Read More</button></a>
-      </div>
-      `;
+  object_index.forEach(({ name, year, brand, type, colour} = rows) => {
+    //result += `
+    //  <div class="card">
+    //      <img class="card-image" src="${image}" alt="Product image for the ${name} VSCode extension."/>
+    //      <h1 class="card-name">${name}</h1>
+    //      <p class="card-about">${about}</p>
+    //      <a class="card-link" href="${hyperlink}"><button class="btn">Read More</button></a>
+    //  </div>
+    //  `;
+    document.getElementById(name).innerHTML = "${name}";
+    document.getElementById(year).innerHTML = "${year}";
+    document.getElementById(brand).innerHTML = "${brand}";
+    document.getElementById(type).innerHTML = "${type}";
+    document.getElementById(colour).innerHTML = "${colour}";
 },
 
 
 function sort_button_hover () {
   
-},
-
-function device_object_show () {
-    device_id = "sample"
 },
 
 function navigation_box_display () {
@@ -118,9 +119,19 @@ function search_obj () {
 
 },
 
-filter_button.addEventListener("mouseover", filter_button_hover);
-sort_button.addEventListener("mouse_over", sort_button_hover)
-device_objects.addEventListener("click", device_object_show);
+filter_button.addEventListener("mouseover", filter_button_hover) {
+
+}
+
+sort_button.addEventListener("mouse_over", sort_button_hover) {
+
+}
+
+device_objects.addEventListener("click", function(event) {
+  const device_id = event.target.id;
+  device_object_show(device_id);
+}
+
 nav_icon.addEventListener("mouseover", navigation_box_display);
-clear_icon.addEventListener("click", search_clear)
-search_icon.addEventListener("click", search_obj)
+clear_icon.addEventListener("click", search_clear);
+search_icon.addEventListener("click", search_obj)};
