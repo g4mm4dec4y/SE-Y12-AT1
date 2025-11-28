@@ -3,6 +3,22 @@ html {
   font-family: "Roboto Condensed", sans-serif;
 }
 
+.filter_popup {
+  display: none;
+}
+
+.filter_button:hover + .filter_popup {
+  display: block;
+}
+
+.sort_popup {
+  display: none;
+}
+
+.sort_button:hover + .sort_popup {
+  display: block;
+}
+
 /*
 .roboto-condensed {
   font-family: "Roboto Condensed", sans-serif;

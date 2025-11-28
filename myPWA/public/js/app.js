@@ -119,6 +119,7 @@ function search_obj () {
 
 },
 
+/*
 filter_button.addEventListener("mouseover", filter_button_hover) {
 
 }
@@ -135,3 +136,4 @@ device_objects.addEventListener("click", function(event) {
 nav_icon.addEventListener("mouseover", navigation_box_display);
 clear_icon.addEventListener("click", search_clear);
 search_icon.addEventListener("click", search_obj)};
+*/);}
