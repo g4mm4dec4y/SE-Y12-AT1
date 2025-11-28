@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="css/style.css">
     <title>buzz of the 00s</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/x-icon" href="/images/icon.png">
+    <link rel="icon" type="image/x-icon" href="images/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   </head>
 
@@ -36,36 +37,33 @@
 <!-- interaction bar -->
       <div class="search_bar">
             
-         <select id="brand_filter">
+         <select id="brand_filter" class="action">
             <option selected disabled>Filter by Brand</option>
             <option id="brand">a</option>
          </select>
             
-         <select id="colour_filter">
+         <select id="colour_filter" class="action">
             <option selected disabled>Filter by Colour</option>
             <option id="brand">a</option>
          </select>
             
-         <select id="type_filter">
+         <select id="type_filter" class="action">
             <option selected disabled>Filter by Type</option>
             <option id="brand">a</option>
          </select>
 
-         <select id="sort_popup">
+         <form id ="search_field" class="action">
+            <input type="search" id="search" name="search_bar" placeholder="Search name...">
+            <button type="submit"><i class="fa fa-search"></i></button>
+         </form>
+
+         <select id="sort_popup" class="action">
             <option selected disabled>Sort By</option>
             <option id="alphabetical">Alphabetical (A-Z)</option>
             <option id="reverse">Alphabetical (Z-A)</option>
             <option id="increase">By year (low to high)</option>
             <option id="decreasing">By year (high to low)</option>
          </select>
-
-         <div id = search_field>
-            <input type="search" id="search" name="search_bar" placeholder="Search name...">
-         </div>
-
-         <div id="search_icon">
-            <button></button>
-         </div>
 
       </div>
 
