@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>buzz of the 00s</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/x-icon" href="images/icon.png">
+    <link rel="icon" type="image/x-icon" href="/images/icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -44,12 +44,12 @@
             
          <select id="colour_filter" class="action">
             <option selected disabled>Filter by Colour</option>
-            <option id="brand">a</option>
+            <option id="colour">a</option>
          </select>
             
          <select id="type_filter" class="action">
             <option selected disabled>Filter by Type</option>
-            <option id="brand">a</option>
+            <option id="type">a</option>
          </select>
 
          <form id ="search_field" class="action">
@@ -62,7 +62,7 @@
             <option id="alphabetical">Alphabetical (A-Z)</option>
             <option id="reverse">Alphabetical (Z-A)</option>
             <option id="increase">By year (low to high)</option>
-            <option id="decreasing">By year (high to low)</option>
+            <option id="decrease">By year (high to low)</option>
          </select>
 
       </div>
@@ -72,51 +72,61 @@
 
       <!-- individual objects are displayed here -->
         <div class="object" id="1">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/imacg3.png" alt="iMac G3">
            <p>iMac G3</p>
         </div>
 
         <div class="object" id="2">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/imacg4.png" alt="iMac G4">
            <p>iMac G4</p>
         </div>
 
         <div class="object" id="3">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/iphone3gs.png" alt="iPhone 3Gs">
            <p>iPhone 3Gs</p>
         </div>
 
         <div class="object" id="4">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/cybershot.png" alt="Sony Cybershot">
            <p>Sony Cybershot</p>
         </div>
 
         <div class="object" id="5">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/gameboyadv.png" alt="Game Boy Advanced">
            <p>Game Boy Advance</p>
         </div>
 
         <div class="object" id="6">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/motorolav525.png" alt="Motorola V525">
            <p>Motorola V525</p>
         </div>
 
         <div class="object" id="7">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/motorolav3.png" alt="Motorola Razr V3">
            <p>Motorola Razr V3</p>
         </div>
 
         <div class="object" id="8">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/samsungphone.png" alt="Samsung SPH-i300">
            <p>Samsung SPH-i300</p>
         </div>
 
         <div class="object" id="9">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/iphone2g.png" alt="iPhone 2G">
            <p>iPhone 2G</p>
         </div>
 
         <div class="object" id="10">
+           <a href="#popupdiv"></a>
            <img class="image" src="images/walkman.png" alt="Sony Walkman S603">
            <p>Sony Walkman S603</p>
         </div>
@@ -125,23 +135,26 @@
 
 
 <!-- Pop up displayed on click with all the information -->
-      <div class="popup" id="popup_container">
-        <!-- container for text, container with image  -->
-         <div id="text_container">
-            <h2 id="name"></h2>
-            <p id="year"></p>
-            <p id="brand"></p>
-            <p id="type"></p>
-            <p id="colour"></p>
+
+      <div id="popupdiv">
+         <div class="popup_window" id="popup_win">
+
+            <button id="popup_close">x</button>
+
+            <div class="leftpopup" id="popupchild">
+               <img src="" alt="Device image">
+            </div>
+
+            <div class="rightpopup>" id="popupchild">
+               <h2 class="name"></h2>
+               <p class="brand"></p>
+               <p class="year"></p>
+               <p class="type"></p>
+               <p class="colour"></p>
+               <p class="about"></p>
+            </div>
          </div>
 
-         <div id="image_container">
-            <img src="">
-         </div>
-
-         <div id="exit">
-            <button hidden></button>
-         </div>
       </div>
 
     </main>

@@ -26,4 +26,22 @@ INSERT INTO site_objects(obj_index,image,device_name,year,brand,type,colour,desc
 INSERT INTO site_objects(obj_index,image,device_name,year,brand,type,colour,description) VALUES (9,'/public/images/iphone2g.png','iPhone 2G', 2007, 'Apple', 'Phone', 'Silver', 'The first iPhone, a revolutionary development in the realm of technology.');
 INSERT INTO site_objects(obj_index,image,device_name,year,brand,type,colour,description) VALUES (10,'/public/images/walkman.png','Sony Walkman S603', 2007, 'Sony', 'Player', 'Multicolour', 'A music player released by Sony, a pinnacle in technology design.');
 
-SELECT * FROM site_objects;
+
+-- Queries for Sorting. Filtering queries embedded into the JS.
+
+
+-- Sort alphabetically by name
+SELECT * FROM site_objects
+ORDER BY device_name;
+
+-- Sort reverse-alphabetically
+SELECT * FROM site_objects
+ORDER BY device_name DESC;
+
+-- Sort by year ascending
+SELECT * FROM site_objects
+ORDER BY year;
+
+-- Sort by year descending
+SELECT * FROM site_objects
+ORDER BY year DESC;
