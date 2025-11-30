@@ -82,6 +82,7 @@ nav:hover .dropdown_content {display: block;}
 }
 
 .device_objects {
+  visibility: visible;
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(2, 1fr);

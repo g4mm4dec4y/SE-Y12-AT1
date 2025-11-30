@@ -40,13 +40,5 @@ SELECT * FROM site_objects ORDER BY device_name DESC;
 SELECT * FROM site_objects ORDER BY year;
 
 -- Sort by year descending
-SELECT * FROM site_objects ORDER BY year DESC;
-
--- Get all brands
-SELECT brand FROM site_objects;
-
--- Get all types
-SELECT type FROM site_objects;
-
--- Get all colours
-SELECT colour FROM site_objects;
+SELECT * FROM site_objects
+ORDER BY year DESC;

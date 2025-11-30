@@ -1,14 +1,11 @@
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database(".database/datasource.db");
-const express = require("express");
-const path = require("path");
-const app = express();
 
-app.use(express.static(path.join(__dirname, "public")));
 
-//Sorting functions
+//SQL functions
 
-function sortAlphabetical(callback) {
+//SORTING FUNCS
+function sortAlphabet(callback) {
   db.all("SELECT * FROM site_objects ORDER BY device_name;", (err, rows) => {
     if (err) {
       console.error(err);
@@ -16,16 +13,10 @@ function sortAlphabetical(callback) {
       return;
     }
     callback(rows);
-  });
-}
+  })
+};
 
-app.get("/sort_name_alphabetical",(req, res) => {
-  sortAlphabetical((rows) => {
-    res.json(rows);
-  });
-});
-
-function sortRevAlphabetical(callback) {
+function sortRevAlphabet(callback) {
   db.all("SELECT * FROM site_objects ORDER BY device_name DESC;", (err, rows) => {
     if (err) {
       console.error(err);
@@ -33,16 +24,10 @@ function sortRevAlphabetical(callback) {
       return;
     }
     callback(rows);
-  });
-}
+  })
+};
 
-app.get("/sort_name_rev_alphabetical",(req, res) => {
-  sortRevAlphabetical((rows) => {
-    res.json(rows);
-  });
-});
-
-function sortYearAscending(callback) {
+function sortYear(callback) {
   db.all("SELECT * FROM site_objects ORDER BY year;", (err, rows) => {
     if (err) {
       console.error(err);
@@ -50,16 +35,10 @@ function sortYearAscending(callback) {
       return;
     }
     callback(rows);
-  });
-}
+  })
+};
 
-app.get("/sort_year_ascending",(req, res) => {
-  sortYearAscending((rows) => {
-    res.json(rows);
-  });
-});
-
-function sortYearDescending(callback) {
+function sortRevYear(callback) {
   db.all("SELECT * FROM site_objects ORDER BY year DESC;", (err, rows) => {
     if (err) {
       console.error(err);
@@ -67,16 +46,11 @@ function sortYearDescending(callback) {
       return;
     }
     callback(rows);
-  });
-}
+  })
+};
 
-app.get("/sort_year_descending",(req, res) => {
-  sortYearDescending((rows) => {
-    res.json(rows);
-  });
-});
 
-//Filtering functions
+// FILTERING FUNCS
 
 function getBrands(callback) {
   db.all("SELECT brand FROM site_objects;", (err, rows) => {
@@ -86,14 +60,8 @@ function getBrands(callback) {
       return;
     }
     callback(rows);
-  });
-}
-
-app.get("/get_brands",(req, res) => {
-  getBrands((rows) => {
-    res.json(rows);
-  });
-});
+  })
+};
 
 function getTypes(callback) {
   db.all("SELECT type FROM site_objects;", (err, rows) => {
@@ -103,14 +71,8 @@ function getTypes(callback) {
       return;
     }
     callback(rows);
-  });
-}
-
-app.get("/get_types",(req, res) => {
-  getTypes((rows) => {
-    res.json(rows);
-  });
-});
+  })
+};
 
 function getColours(callback) {
   db.all("SELECT colour FROM site_objects;", (err, rows) => {
@@ -120,15 +82,61 @@ function getColours(callback) {
       return;
     }
     callback(rows);
-  });
-}
+  })
+};
 
-app.get("/get_colours",(req, res) => {
-  getColours((rows) => {
+
+const express = require("express");
+const path = require("path");
+const app = express();
+
+app.use(express.static(path.join(__dirname, "public")));
+
+// Retrieving SQL function queries
+
+//SORTING FUNCS
+app.get("/sort_alphabet", (req, res) => {
+  sortAlphabet((rows) => {
     res.json(rows);
   });
 });
 
-//
+app.get("/sort_rev_alphabet", (req, res) => {
+  sortRevAlphabet((rows) => {
+    res.json(rows);
+  });
+});
+
+app.get("/sort_year", (req, res) => {
+  sortYear((rows) => {
+    res.json(rows);
+  });
+});
+
+app.get("/sort_rev_year", (req, res) => {
+  sortRevYear((rows) => {
+    res.json(rows);
+  });
+});
+
+// FILTERING FUNCS
+
+app.get("/get_brands", (req, res) => {
+  getBrands((rows) => {
+    res.json(rows);
+  });
+});
+
+app.get("/get_types", (req, res) => {
+  getTypes((rows) => {
+    res.json(rows);
+  });
+});
+
+app.get("/get_colours", (req, res) => {
+  getColours((rows) => {
+    res.json(rows);
+  });
+});
 
 app.listen(8000, () =>  {console.log("Server is running on Port 8000, visit http://localhost:8000/ or http://127.0.0.1:8000 to access your website");} );
