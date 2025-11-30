@@ -2,47 +2,88 @@ const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database(".database/datasource.db");
 
 
-//Taking sql data and putting it in JSON format in the
+//SQL functions
 
-let myString = "[\n";
-db.all("SELECT * FROM extension", function (err, rows) {
-  let myCounter = 0;
-  rows.forEach(function (row) {
-    // console.log(row.obj_index + ": " + row.image + ": " + row.device_name + ": " + row.year + ": " + row.brand + ": " + row.type + ": " + row.colour + ": " + row.description );
-    myString =
-      myString +
-      '{\n"obj_index":' +
-      row.obj_index +
-      ',\n"image":"' +
-      row.image +
-      '",\n"device_name":"' +
-      row.device_name +
-      '",\n"year":"' +
-      row.year +
-      '",\n"brand":"' +
-      row.brand;
-      '",\n"type":"' +
-      row.type;
-      '",\n"colour":"' +
-      row.colour;
-      '",\n"description":"' +
-      row.description;
-    myCounter++;
-    if (myCounter == rows.length) {
-      myString = myString + '"\n}\n';
-    } else {
-      myString = myString + '"\n},\n';
-    }
-  });
-
-  // console.log(myString);
-  var fs = require("fs");
-  fs.writeFile("public/frontEndData.json", myString + "]", function (err) {
+//SORTING FUNCS
+function sortAlphabet(callback) {
+  db.all("SELECT * FROM site_objects ORDER BY device_name;", (err, rows) => {
     if (err) {
-      console.log(err);
+      console.error(err);
+      callback([]);
+      return;
     }
-  });
-});
+    callback(rows);
+  })
+};
+
+function sortRevAlphabet(callback) {
+  db.all("SELECT * FROM site_objects ORDER BY device_name DESC;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  })
+};
+
+function sortYear(callback) {
+  db.all("SELECT * FROM site_objects ORDER BY year;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  })
+};
+
+function sortRevYear(callback) {
+  db.all("SELECT * FROM site_objects ORDER BY year DESC;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  })
+};
+
+
+// FILTERING FUNCS
+
+function getBrands(callback) {
+  db.all("SELECT brand FROM site_objects;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  })
+};
+
+function getTypes(callback) {
+  db.all("SELECT type FROM site_objects;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  })
+};
+
+function getColours(callback) {
+  db.all("SELECT colour FROM site_objects;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  })
+};
 
 
 const express = require("express");
@@ -50,7 +91,51 @@ const path = require("path");
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+// Retrieving SQL function queries
+
+//SORTING FUNCS
+app.get("/sort_alphabet", (req, res) => {
+  sortAlphabet((rows) => {
+    res.json(rows);
+  });
 });
+
+app.get("/sort_rev_alphabet", (req, res) => {
+  sortRevAlphabet((rows) => {
+    res.json(rows);
+  });
+});
+
+app.get("/sort_year", (req, res) => {
+  sortYear((rows) => {
+    res.json(rows);
+  });
+});
+
+app.get("/sort_rev_year", (req, res) => {
+  sortRevYear((rows) => {
+    res.json(rows);
+  });
+});
+
+// FILTERING FUNCS
+
+app.get("/get_brands", (req, res) => {
+  getBrands((rows) => {
+    res.json(rows);
+  });
+});
+
+app.get("/get_types", (req, res) => {
+  getTypes((rows) => {
+    res.json(rows);
+  });
+});
+
+app.get("/get_colours", (req, res) => {
+  getColours((rows) => {
+    res.json(rows);
+  });
+});
+
 app.listen(8000, () =>  {console.log("Server is running on Port 8000, visit http://localhost:8000/ or http://127.0.0.1:8000 to access your website");} );
