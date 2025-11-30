@@ -1,56 +1,134 @@
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database(".database/datasource.db");
-
-
-//Taking sql data and putting it in JSON format in the
-
-let myString = "[\n";
-db.all("SELECT * FROM extension", function (err, rows) {
-  let myCounter = 0;
-  rows.forEach(function (row) {
-    // console.log(row.obj_index + ": " + row.image + ": " + row.device_name + ": " + row.year + ": " + row.brand + ": " + row.type + ": " + row.colour + ": " + row.description );
-    myString =
-      myString +
-      '{\n"obj_index":' +
-      row.obj_index +
-      ',\n"image":"' +
-      row.image +
-      '",\n"device_name":"' +
-      row.device_name +
-      '",\n"year":"' +
-      row.year +
-      '",\n"brand":"' +
-      row.brand;
-      '",\n"type":"' +
-      row.type;
-      '",\n"colour":"' +
-      row.colour;
-      '",\n"description":"' +
-      row.description;
-    myCounter++;
-    if (myCounter == rows.length) {
-      myString = myString + '"\n}\n';
-    } else {
-      myString = myString + '"\n},\n';
-    }
-  });
-
-  // console.log(myString);
-  var fs = require("fs");
-  fs.writeFile("public/frontEndData.json", myString + "]", function (err) {
-    if (err) {
-      console.log(err);
-    }
-  });
-});
-
-
 const express = require("express");
 const path = require("path");
 const app = express();
+
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+//Sorting functions
+
+function sortAlphabetical(callback) {
+  db.all("SELECT * FROM site_objects ORDER BY device_name;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  });
+}
+
+app.get("/sort_name_alphabetical",(req, res) => {
+  sortAlphabetical((rows) => {
+    res.json(rows);
+  });
 });
+
+function sortRevAlphabetical(callback) {
+  db.all("SELECT * FROM site_objects ORDER BY device_name DESC;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  });
+}
+
+app.get("/sort_name_rev_alphabetical",(req, res) => {
+  sortRevAlphabetical((rows) => {
+    res.json(rows);
+  });
+});
+
+function sortYearAscending(callback) {
+  db.all("SELECT * FROM site_objects ORDER BY year;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  });
+}
+
+app.get("/sort_year_ascending",(req, res) => {
+  sortYearAscending((rows) => {
+    res.json(rows);
+  });
+});
+
+function sortYearDescending(callback) {
+  db.all("SELECT * FROM site_objects ORDER BY year DESC;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  });
+}
+
+app.get("/sort_year_descending",(req, res) => {
+  sortYearDescending((rows) => {
+    res.json(rows);
+  });
+});
+
+//Filtering functions
+
+function getBrands(callback) {
+  db.all("SELECT brand FROM site_objects;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  });
+}
+
+app.get("/get_brands",(req, res) => {
+  getBrands((rows) => {
+    res.json(rows);
+  });
+});
+
+function getTypes(callback) {
+  db.all("SELECT type FROM site_objects;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  });
+}
+
+app.get("/get_types",(req, res) => {
+  getTypes((rows) => {
+    res.json(rows);
+  });
+});
+
+function getColours(callback) {
+  db.all("SELECT colour FROM site_objects;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  });
+}
+
+app.get("/get_colours",(req, res) => {
+  getColours((rows) => {
+    res.json(rows);
+  });
+});
+
+//
+
 app.listen(8000, () =>  {console.log("Server is running on Port 8000, visit http://localhost:8000/ or http://127.0.0.1:8000 to access your website");} );
