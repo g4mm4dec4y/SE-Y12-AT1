@@ -113,7 +113,7 @@ function filter (filter_category, specific_option) {
   }
 
   const container = document.getElementById("brand_filter");
-  constainer.innerHTML = "";
+  container.innerHTML = "";
   
   fetch("/get_brands")
     .then(response => response.json ())
