@@ -26,14 +26,13 @@ INSERT INTO site_objects(obj_index,image,device_name,year,brand,type,colour,desc
 
 
 -- Sort alphabetically by name
-SELECT * FROM site_objects ORDER BY device_name;
+SELECT * FROM site_objects ORDER BY LOWER(device_name) ASC;
 
 -- Sort reverse-alphabetically
-SELECT * FROM site_objects ORDER BY device_name DESC;
+SELECT * FROM site_objects ORDER BY LOWER(device_name) DESC;
 
 -- Sort by year ascending
 SELECT * FROM site_objects ORDER BY year;
 
 -- Sort by year descending
-SELECT * FROM site_objects
-ORDER BY year DESC;
+SELECT * FROM site_objects ORDER BY year DESC;

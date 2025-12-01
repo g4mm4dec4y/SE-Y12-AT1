@@ -36,10 +36,6 @@ function appendData(obj_index) {
 }
 
 
-//reset popup
-
-
-//get by class returns array-like obj so need to parse through
 //open popup
 const open_buttons = document.getElementsByClassName('object')
 for (let btn of open_buttons) {
@@ -48,10 +44,9 @@ for (let btn of open_buttons) {
   }); //on click open popup
 }
 
-
 function popup_func(item_id) {
   appendData(item_id);
-  document.getElementById('popup_win').style.visibility = 'visible' //display popup
+  document.getElementById('popup_win').style.visibility = 'visible' //displays popup
   document.body.style.overflow = 'hidden'; // prevent page from scrolling
   document.getElementById('blur_body').style.filter = 'blur(5px)' //blurs body of site
 }
@@ -67,13 +62,8 @@ function close_popup_func() {
 }
 
 
-//FUNCTIONAL UNTIL THIS POINT
-
-
-
 // need to add appendData() somewhere to append the data changes 
 const object_order_default = [1,2,3,4,5,6,7,8,9,10]; //dunno if relevant
-const object_order_flex = []; //dunno if relevant
 const device_objects = document.getElementsByClassName('object');
 
 // function hides all device objects and then unhides as per default array
@@ -86,102 +76,66 @@ function reset_objects () {
   }
 }
 
-// chunky sort function (im scared for filtering)
 function sort_by (selected_option) {
   //hide all the objects
   for (var i = 0; i < device_objects.length; i++) {
-    device_objects[i].style.visibility = "hidden";
+    device_objects[i].style.display = "none";
   }
-  //empty the flex order to remove past orders not neccessary??
-  object_order_flex = [];
 
   if (selected_option === "alphabetical") {
   // fetch sql query and unhide 
     fetch("/sort_alphabet")
     .then(response => response.json ())
     .then(data => {
-      data.forEach(obj => {
-        const index = obj.object_index;
-        document.getElementById(`${index}`).style.visibility = 'visible';
+      const container=document.querySelector(".device_objects");
+      data.forEach((obj) => {
+        const dev = document.getElementById(obj.obj_index);
+        console.log(obj.obj_index, dev);
+        container.appendChild(dev);
+        dev.style.display="block";
       });
     })
-  } else if (selected_option === "reverse alphabetical") {
+  } else if (selected_option === "reverse") {
     fetch("/sort_rev_alphabet")
     .then(response => response.json ())
     .then(data => {
-      data.forEach(obj => {
-        const index = obj.object_index;
-        document.getElementById(`${index}`).style.visibility = 'visible';
+      const container=document.querySelector(".device_objects");
+      data.forEach((obj) => {
+        const dev = document.getElementById(obj.obj_index);
+        container.appendChild(dev);
+        dev.style.display="block";
       });
     })
-  } else if (selected_option === "year increasing") {
+  } else if (selected_option === "increase") {
     fetch("/sort_year")
     .then(response => response.json ())
     .then(data => {
-      data.forEach(obj => {
-        const index = obj.object_index;
-        document.getElementById(`${index}`).style.visibility = 'visible';
+      const container=document.querySelector(".device_objects");
+      data.forEach((obj) => {
+        const dev = document.getElementById(obj.obj_index);
+        container.appendChild(dev);
+        dev.style.display="block";
       });
     })
-  } else if (selected_option === "year decreasing") {
+  } else if (selected_option === "decrease") {
     fetch("/sort_rev_year")
     .then(response => response.json ())
     .then(data => {
-      data.forEach(obj => {
-        const index = obj.object_index;
-        document.getElementById(`${index}`).style.visibility = 'visible';
+      const container=document.querySelector(".device_objects");
+      data.forEach((obj) => {
+        const dev = document.getElementById(obj.obj_index);
+        dev.style.display="block";
+        container.appendChild(dev);
       });
     })
   };
 }
 
-function filter (filter_category, specific_option) {
-  for (var i = 0; i < device_objects.length; i++) {
-    device_objects[i].style.visibility = "hidden";
-  }
-
-  const container = document.getElementById("brand_filter");
-  container.innerHTML = "";
-  
-  fetch("/get_brands")
-    .then(response => response.json ())
-    .then(data => {
-      const brand_count = [];
-      data.forEach(obj => {
-        const brand = obj.brand;
-        if (!brand_count.includes(brand)) {
-          brand_count.push(brand);
-          const brand_button = document.createElement("button");
-          brand_button.id = brand;
-          brand_button.textContent = obj.brand;
-          brand_button.addEventListener("click", () => {
-            fetch(`/devices?brand=${encodeURIComponent(brand)}`)
-              .then(res => res.json())
-              .then(devices => {
-                devices.forEach(obj => {
-                  const index = obj.object_index;
-                  document.getElementById(`${index}`).style.visibility = 'visible';
-                });
-              });
-          });
-          container.appendChild(brand_button);
-        }
-      });
-    })
-}
 
 
-//EVENT LISTENING
+//Listening for sort button to change 
 
-const page_sort_btn = document.getElementById("sort_popup");
-const page_brand_btn = document.getElementById("brand_filter");
-const page_type_btn = document.getElementById("type_filter");
-const page_colour_btn = document.getElementById("colour_filter");
-
-//listens for different sort options
-page_sort_btn.addEventListener("click", function() {
-  const sorting_choice = document.getElementsByClassName('sort_option')
-  for (let btn of sorting_choice) {
-    btn.addEventListener('click', function() {
-    sort_by(this.id);
-  })}});
+document.getElementById("sort_popup").addEventListener("change", function() {
+  const selectedId = this.options[this.selectedIndex].id;
+  sort_by(selectedId);
+});

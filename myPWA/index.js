@@ -1,13 +1,13 @@
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database(".database/datasource.db");
-//Port
 const express = require("express");
 const path = require("path");
 const app = express();
 
+
 //SQL functions
 
-//GET OBJECT FUNC
+// function to get all objects
 
 function getDevices(callback) {
   db.all("SELECT * FROM site_objects;", (err, rows) => {
@@ -20,9 +20,9 @@ function getDevices(callback) {
   })
 };
 
-//SORTING FUNCS
+// functions for sorting 
 function sortAlphabet(callback) {
-  db.all("SELECT * FROM site_objects ORDER BY device_name;", (err, rows) => {
+  db.all("SELECT * FROM site_objects ORDER BY LOWER(device_name) ASC;", (err, rows) => {
     if (err) {
       console.error(err);
       callback([]);
@@ -33,7 +33,7 @@ function sortAlphabet(callback) {
 };
 
 function sortRevAlphabet(callback) {
-  db.all("SELECT * FROM site_objects ORDER BY device_name DESC;", (err, rows) => {
+  db.all("SELECT * FROM site_objects ORDER BY LOWER(device_name) DESC;", (err, rows) => {
     if (err) {
       console.error(err);
       callback([]);
@@ -66,45 +66,9 @@ function sortRevYear(callback) {
 };
 
 
-// FILTERING FUNCS
-
-function getBrands(callback) {
-  db.all("SELECT brand FROM site_objects;", (err, rows) => {
-    if (err) {
-      console.error(err);
-      callback([]);
-      return;
-    }
-    callback(rows);
-  })
-};
-
-function getTypes(callback) {
-  db.all("SELECT type FROM site_objects;", (err, rows) => {
-    if (err) {
-      console.error(err);
-      callback([]);
-      return;
-    }
-    callback(rows);
-  })
-};
-
-function getColours(callback) {
-  db.all("SELECT colour FROM site_objects;", (err, rows) => {
-    if (err) {
-      console.error(err);
-      callback([]);
-      return;
-    }
-    callback(rows);
-  })
-};
-
-
 // Retrieving SQL function queries
 
-//SORTING FUNCS
+// functions to get sorted objects
 
 app.get("/sort_alphabet", (req, res) => {
   sortAlphabet((rows) => {
@@ -130,27 +94,7 @@ app.get("/sort_rev_year", (req, res) => {
   });
 });
 
-// FILTERING FUNCS
-
-app.get("/get_brands", (req, res) => {
-  getBrands((rows) => {
-    res.json(rows);
-  });
-});
-
-app.get("/get_types", (req, res) => {
-  getTypes((rows) => {
-    res.json(rows);
-  });
-});
-
-app.get("/get_colours", (req, res) => {
-  getColours((rows) => {
-    res.json(rows);
-  });
-});
-
-// GET ALL
+// function to get all objects
 
 app.get("/devices", (req, res) => {
   getDevices((rows) => {

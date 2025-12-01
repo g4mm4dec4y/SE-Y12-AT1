@@ -94,12 +94,14 @@ nav:hover .dropdown_content {display: block;}
   padding: 7rem;
 }
 
+
 .object {
   width: 300px;
   height: 300px;
   margin-bottom: 7rem;
   text-align: center;
   position: relative;
+  display: block;
 }
 
 div.object {
