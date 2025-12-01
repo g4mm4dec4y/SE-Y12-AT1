@@ -104,31 +104,40 @@ function sort_by (selected_option) {
         document.getElementById(`${index}`).style.visibility = 'visible';
       });
     })
-    // idk what to do this this oops
-    .catch(err => console.error(err));
   };
 }
-
 
 function filter (filter_category, specific_option) {
   for (var i = 0; i < device_objects.length; i++) {
     device_objects[i].style.visibility = "hidden";
   }
 
-
+  const container = document.getElementById("brand_filter");
+  constainer.innerHTML = "";
+  
   fetch("/get_brands")
     .then(response => response.json ())
     .then(data => {
       const brand_count = [];
       data.forEach(obj => {
         const brand = obj.brand;
-        if (brand != brand_count) {
+        if (!brand_count.includes(brand)) {
           brand_count.push(brand);
-          const brand_button = document.createElement("brand");
+          const brand_button = document.createElement("button");
+          brand_button.id = brand;
           brand_button.textContent = obj.brand;
-          brand_button.addEvent
+          brand_button.addEventListener("click", () => {
+            fetch(`/devices?brand=${encodeURIComponent(brand)}`)
+              .then(res => res.json())
+              .then(devices => {
+                devices.forEach(obj => {
+                  const index = obj.object_index;
+                  document.getElementById(`${index}`).style.visibility = 'visible';
+                });
+              });
+          });
+          container.appendChild(brand_button);
         }
-        
       });
     })
 }
