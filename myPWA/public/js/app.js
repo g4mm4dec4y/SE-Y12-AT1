@@ -5,45 +5,73 @@ if ("serviceWorker" in navigator) {
       .then((res) => console.log("service worker registered"))
       .catch((err) => console.log("service worker not registered", err));
   });
-
-/*
-
-function appendData(data) {
-  data.forEach(({ obj_index, image, device_name, year, brand, type, colour, description }) => {
-
-// Inserting the relevant information about the device
-    result += `
-        <div class="rightpopup">
-          <h2 class="name">${device_name}</h2>
-          <p class="brand">${brand}</p>
-          <p class="year">${year}</p>
-          <p class="type">${type}</p>
-          <p class="colour">${colour}</p>
-          <p class="about">${description}</p>
-        </div>
-        `;
-
-// Inserting the image link to the right side of the card
-    result += `
-        <div class="leftpopup">
-          <img src="${image}" alt="Device image">
-        </div>
-        `;
-  });
-  document.querySelector(".container").innerHTML = result;
 }
 
 
-const open_button = document.getElementsByClassName('open')
-open_button.addEventListener('click', popup_func)
+function appendData(obj_index) {
+  fetch(`/devices`)
+              .then(res => res.json())
+              .then(devices => {
+                const device = devices.find(d => d.obj_index === Number(obj_index));
+                const {image, device_name, year, brand, type, colour, description} = device;
 
-function popup_func() {
-  appendData()
-  document.getElementById('popupwin').style.visibility = 'visible'
-}
-*/
+                  document.getElementById("rightpopup").innerHTML = `
+                    <h2 class="name">${device_name}</h2>
+                    <p class="brand">${brand}</p>
+                    <p class="year">${year}</p>
+                    <p class="type">${type}</p>
+                    <p class="colour">${colour}</p>
+                    <p class="about">${description}</p>
+                  `;
+
+                  document.getElementById("leftpopup").innerHTML = `
+                    <img src="/${image}" alt="Device image">
+                  `;
+
+                  // debugging
+                  console.log('Devices array:', devices);
+                  console.log('Selected device:', device);
+
+                });
 }
 
+
+//reset popup
+
+
+//get by class returns array-like obj so need to parse through
+//open popup
+const open_buttons = document.getElementsByClassName('object')
+for (let btn of open_buttons) {
+  btn.addEventListener('click', function() {
+    popup_func(this.id); //get the id of the clicked button
+  }); //on click open popup
+}
+
+
+function popup_func(item_id) {
+  appendData(item_id);
+  document.getElementById('popup_win').style.visibility = 'visible' //display popup
+  document.body.style.overflow = 'hidden'; // prevent page from scrolling
+  document.getElementById('blur_body').style.filter = 'blur(5px)' //blurs body of site
+}
+
+//close popup
+const close_btn = document.getElementById('popup_close');
+close_btn.addEventListener('click', close_popup_func); //on click close popup
+
+function close_popup_func() {
+  document.getElementById('popup_win').style.visibility = 'hidden' //hide popup
+  document.body.style.overflow = 'visible'; // allows scroll again
+  document.getElementById('blur_body').style.filter = 'blur(0px)' //unblurs body
+}
+
+
+//FUNCTIONAL UNTIL THIS POINT
+
+
+
+// need to add appendData() somewhere to append the data changes 
 const object_order_default = [1,2,3,4,5,6,7,8,9,10]; //dunno if relevant
 const object_order_flex = []; //dunno if relevant
 const device_objects = document.getElementsByClassName('object');
@@ -141,3 +169,19 @@ function filter (filter_category, specific_option) {
       });
     })
 }
+
+
+//EVENT LISTENING
+
+const page_sort_btn = document.getElementById("sort_popup");
+const page_brand_btn = document.getElementById("brand_filter");
+const page_type_btn = document.getElementById("type_filter");
+const page_colour_btn = document.getElementById("colour_filter");
+
+//listens for different sort options
+page_sort_btn.addEventListener("click", function() {
+  const sorting_choice = document.getElementsByClassName('sort_option')
+  for (let btn of sorting_choice) {
+    btn.addEventListener('click', function() {
+    sort_by(this.id);
+  })}});

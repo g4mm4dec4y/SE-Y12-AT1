@@ -1,8 +1,24 @@
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database(".database/datasource.db");
-
+//Port
+const express = require("express");
+const path = require("path");
+const app = express();
 
 //SQL functions
+
+//GET OBJECT FUNC
+
+function getDevices(callback) {
+  db.all("SELECT * FROM site_objects;", (err, rows) => {
+    if (err) {
+      console.error(err);
+      callback([]);
+      return;
+    }
+    callback(rows);
+  })
+};
 
 //SORTING FUNCS
 function sortAlphabet(callback) {
@@ -86,15 +102,10 @@ function getColours(callback) {
 };
 
 
-const express = require("express");
-const path = require("path");
-const app = express();
-
-app.use(express.static(path.join(__dirname, "public")));
-
 // Retrieving SQL function queries
 
 //SORTING FUNCS
+
 app.get("/sort_alphabet", (req, res) => {
   sortAlphabet((rows) => {
     res.json(rows);
@@ -139,4 +150,15 @@ app.get("/get_colours", (req, res) => {
   });
 });
 
+// GET ALL
+
+app.get("/devices", (req, res) => {
+  getDevices((rows) => {
+    res.json(rows);
+  });
+});
+
+
+
+app.use(express.static(path.join(__dirname, "public")));
 app.listen(8000, () =>  {console.log("Server is running on Port 8000, visit http://localhost:8000/ or http://127.0.0.1:8000 to access your website");} );
