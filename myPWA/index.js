@@ -8,7 +8,6 @@ const app = express();
 //SQL functions
 
 // function to get all objects
-
 function getDevices(callback) {
   db.all("SELECT * FROM site_objects;", (err, rows) => {
     if (err) {
@@ -21,6 +20,8 @@ function getDevices(callback) {
 };
 
 // functions for sorting 
+
+// alphabetical
 function sortAlphabet(callback) {
   db.all("SELECT * FROM site_objects ORDER BY LOWER(device_name) COLLATE NOCASE ASC;", (err, rows) => {
     if (err) {
@@ -32,6 +33,7 @@ function sortAlphabet(callback) {
   })
 };
 
+// reverse alphabetical
 function sortRevAlphabet(callback) {
   db.all("SELECT * FROM site_objects ORDER BY LOWER(device_name) COLLATE NOCASE DESC;", (err, rows) => {
     if (err) {
@@ -43,6 +45,7 @@ function sortRevAlphabet(callback) {
   })
 };
 
+// ascending year
 function sortYear(callback) {
   db.all("SELECT * FROM site_objects ORDER BY year;", (err, rows) => {
     if (err) {
@@ -54,6 +57,7 @@ function sortYear(callback) {
   })
 };
 
+// descending year
 function sortRevYear(callback) {
   db.all("SELECT * FROM site_objects ORDER BY year DESC;", (err, rows) => {
     if (err) {
@@ -69,7 +73,6 @@ function sortRevYear(callback) {
 // Retrieving SQL function queries
 
 // functions to get sorted objects
-
 app.get("/sort_alphabet", (req, res) => {
   sortAlphabet((rows) => {
     res.json(rows);
@@ -95,7 +98,6 @@ app.get("/sort_rev_year", (req, res) => {
 });
 
 // function to get all objects
-
 app.get("/devices", (req, res) => {
   getDevices((rows) => {
     res.json(rows);
