@@ -7,14 +7,14 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-
+//changing popup data to specific item clicked
 function appendData(obj_index) {
   fetch(`/devices`)
               .then(res => res.json())
               .then(devices => {
                 const device = devices.find(d => d.obj_index === Number(obj_index));
                 const {image, device_name, year, brand, type, colour, description} = device;
-
+                //data obtained is added to the relevant popup text fields
                   document.getElementById("rightpopup").innerHTML = `
                     <h2 class="name">${device_name}</h2>
                     <p class="brand">${brand}</p>
@@ -23,7 +23,7 @@ function appendData(obj_index) {
                     <p class="colour">${colour}</p>
                     <p class="about">${description}</p>
                   `;
-
+                // image assigned to image div
                   document.getElementById("leftpopup").innerHTML = `
                     <img src="/${image}" alt="Device image">
                   `;
@@ -31,29 +31,38 @@ function appendData(obj_index) {
 }
 
 
-//open popup
 const open_buttons = document.getElementsByClassName('object')
 for (let btn of open_buttons) {
+  //open popup on click
   btn.addEventListener('click', function() {
-    popup_func(this.id); //get the id of the clicked button
-  }); //on click open popup
+    //get the id of the clicked button
+    popup_func(this.id); 
+  }); 
 }
 
+// adding object data to popup and revealing it
 function popup_func(item_id) {
   appendData(item_id);
-  document.getElementById('popup_win').style.visibility = 'visible' //displays popup
-  document.body.style.overflow = 'hidden'; // prevent page from scrolling
-  document.getElementById('blur_body').style.filter = 'blur(5px)' //blurs body of site
+  //displays popup
+  document.getElementById('popup_win').style.visibility = 'visible'
+  // prevent page from scrolling
+  document.body.style.overflow = 'hidden';
+  //blur body of site
+  document.getElementById('blur_body').style.filter = 'blur(5px)' 
 }
 
 //close popup
 const close_btn = document.getElementById('popup_close');
-close_btn.addEventListener('click', close_popup_func); //on click close popup
+//on click close popup
+close_btn.addEventListener('click', close_popup_func);
 
 function close_popup_func() {
-  document.getElementById('popup_win').style.visibility = 'hidden' //hide popup
-  document.body.style.overflow = 'visible'; // allows scroll again
-  document.getElementById('blur_body').style.filter = 'blur(0px)' //unblurs body
+  //hide popup
+  document.getElementById('popup_win').style.visibility = 'hidden' 
+  // allow scroll again
+  document.body.style.overflow = 'visible'; 
+  //unblur body
+  document.getElementById('blur_body').style.filter = 'blur(0px)' 
 }
 
 
@@ -71,6 +80,7 @@ function reset_objects () {
   }
 }
 
+// function to sort objects
 function sort_by (selected_option) {
   //hide all the objects
   for (var i = 0; i < device_objects.length; i++) {
@@ -78,17 +88,20 @@ function sort_by (selected_option) {
   }
 
   if (selected_option === "alphabetical") {
-  // fetch sql query and unhide 
+  // fetch json
     fetch("/sort_alphabet")
     .then(response => response.json ())
     .then(data => {
-      const container=document.querySelector(".device_objects");
+      // access device object div
+      const container = document.querySelector(".device_objects");
       data.forEach((obj) => {
+        // move each object to the end of div to sort
         const dev = document.getElementById(obj.obj_index);
         container.appendChild(dev);
         dev.style.display="block";
       });
     })
+  // same process for other sorting options
   } else if (selected_option === "reverse") {
     fetch("/sort_rev_alphabet")
     .then(response => response.json ())
@@ -125,11 +138,10 @@ function sort_by (selected_option) {
   };
 }
 
-
-
-//Listening for sort button to change 
-
+// Listening for sort button to change 
 document.getElementById("sort_popup").addEventListener("change", function() {
+  // get the sort type
   const selectedId = this.options[this.selectedIndex].id;
+  // call relevant sort
   sort_by(selectedId);
 });
