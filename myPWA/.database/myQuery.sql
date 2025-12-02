@@ -36,3 +36,6 @@ SELECT * FROM site_objects ORDER BY year;
 
 -- Sort by year descending
 SELECT * FROM site_objects ORDER BY year DESC;
+
+---- Select objects
+SELECT * FROM site_objects;
