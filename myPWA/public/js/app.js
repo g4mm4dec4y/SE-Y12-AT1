@@ -82,7 +82,6 @@ function sort_by (selected_option) {
     fetch("/sort_alphabet")
     .then(response => response.json ())
     .then(data => {
-      console.log(data)
       const container=document.querySelector(".device_objects");
       data.forEach((obj) => {
         const dev = document.getElementById(obj.obj_index);
