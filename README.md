@@ -1,4 +1,4 @@
-![alt text](myPWA/public/images/logo.png)
+![alt text](myPWA/public/images/infologo.png)
 
 ## "buzz of the 2000s"
 A personal progressive web app cataloguing devices from the 2000's era. 
