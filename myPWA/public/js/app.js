@@ -27,11 +27,6 @@ function appendData(obj_index) {
                   document.getElementById("leftpopup").innerHTML = `
                     <img src="/${image}" alt="Device image">
                   `;
-
-                  // debugging
-                  console.log('Devices array:', devices);
-                  console.log('Selected device:', device);
-
                 });
 }
 
@@ -87,10 +82,10 @@ function sort_by (selected_option) {
     fetch("/sort_alphabet")
     .then(response => response.json ())
     .then(data => {
+      console.log(data)
       const container=document.querySelector(".device_objects");
       data.forEach((obj) => {
         const dev = document.getElementById(obj.obj_index);
-        console.log(obj.obj_index, dev);
         container.appendChild(dev);
         dev.style.display="block";
       });

@@ -22,7 +22,7 @@ function getDevices(callback) {
 
 // functions for sorting 
 function sortAlphabet(callback) {
-  db.all("SELECT * FROM site_objects ORDER BY LOWER(device_name) ASC;", (err, rows) => {
+  db.all("SELECT * FROM site_objects ORDER BY LOWER(device_name) COLLATE NOCASE ASC;", (err, rows) => {
     if (err) {
       console.error(err);
       callback([]);
@@ -33,7 +33,7 @@ function sortAlphabet(callback) {
 };
 
 function sortRevAlphabet(callback) {
-  db.all("SELECT * FROM site_objects ORDER BY LOWER(device_name) DESC;", (err, rows) => {
+  db.all("SELECT * FROM site_objects ORDER BY LOWER(device_name) COLLATE NOCASE DESC;", (err, rows) => {
     if (err) {
       console.error(err);
       callback([]);
